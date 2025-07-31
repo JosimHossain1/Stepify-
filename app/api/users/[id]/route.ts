@@ -19,7 +19,10 @@ export async function GET(
 }
 
 // Delete Data by userID
-export async function DELETE({ params }: { params: { id: string } }) {
+export async function DELETE(
+  _request: NextRequest,
+  { params }: { params: { id: string } },
+) {
   const { id } = params;
 
   await dbConnection();
@@ -42,15 +45,13 @@ export async function PATCH(
 ) {
   const { id } = params;
   console.log(id);
-  const { email } = await request.json();
+  const { name } = await request.json();
 
   await dbConnection();
 
   try {
-    const updatedUser = await UserModel.findByIdAndUpdate(id, {
-      email,
-      new: true,
-    });
+    const updatedUser = await UserModel.findByIdAndUpdate(id, { name }, { new: true });
+
 
     return new Response(JSON.stringify(updatedUser), { status: 200 });
   } catch (error) {
