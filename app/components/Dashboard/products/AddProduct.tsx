@@ -16,7 +16,7 @@ const handleAddProduct = async (e) => {
   console.log(response.data.message);
 };
 
-const AddProducts = () => {
+const AddProduct = () => {
   return (
     // Add products form
     <div className='max-w-md mx-auto p-6 bg-white shadow-md rounded-lg mt-5'>
@@ -69,4 +69,4 @@ const AddProducts = () => {
   );
 };
 
-export default AddProducts;
+export default AddProduct;
