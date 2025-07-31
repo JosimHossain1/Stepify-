@@ -1,5 +1,4 @@
 'use client';
-import AddProducts from '@/app/components/Dashboard/products/AddProduct';
 import ShowProduct from '@/app/components/Dashboard/products/ShowProduct';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
@@ -25,7 +24,7 @@ const ProductPage = () => {
   return (
     <div>
       
-      <ShowProduct products={products} />
+      <ShowProduct data={products} />
     </div>
   );
 };
