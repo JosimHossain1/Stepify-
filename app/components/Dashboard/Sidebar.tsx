@@ -57,30 +57,30 @@ export function AppSidebar() {
       url: '/dashboard',
       icon: LayoutDashboard,
     },
-    {
-      title: 'Analytics',
-      url: '/dashboard/analytics',
-      icon: BarChart,
-    },
-    {
-      title: 'Reports',
-      url: '/dashboard/reports',
-      icon: FileBarChart2,
-    },
+    // {
+    //   title: 'Analytics',
+    //   url: '/dashboard/analytics',
+    //   icon: BarChart,
+    // },
+    // {
+    //   title: 'Reports',
+    //   url: '/dashboard/reports',
+    //   icon: FileBarChart2,
+    // },
   ];
 
   // Orders
   const orders = [
     { title: 'All Orders', url: '/dashboard/orders', icon: FileText },
-    { title: 'Pending', url: '/dashboard/orders/pending', icon: Clock },
-    { title: 'Shipped', url: '/dashboard/orders/shipped', icon: Truck },
-    {
-      title: 'Delivered',
-      url: '/dashboard/orders/delivered',
-      icon: CheckCircle,
-    },
-    { title: 'Cancelled', url: '/dashboard/orders/cancelled', icon: Ban },
-    { title: 'Refunds', url: '/dashboard/refunds', icon: RotateCcw },
+    // { title: 'Pending', url: '/dashboard/orders/pending', icon: Clock },
+    // { title: 'Shipped', url: '/dashboard/orders/shipped', icon: Truck },
+    // {
+    //   title: 'Delivered',
+    //   url: '/dashboard/orders/delivered',
+    //   icon: CheckCircle,
+    // },
+    // { title: 'Cancelled', url: '/dashboard/orders/cancelled', icon: Ban },
+    // { title: 'Refunds', url: '/dashboard/refunds', icon: RotateCcw },
   ];
 
   // Products
@@ -91,29 +91,34 @@ export function AppSidebar() {
       icon: ShoppingBasketIcon,
     },
     { title: 'Add Product', url: '/dashboard/add-product', icon: PlusCircle },
-    { title: 'Inventory', url: '/dashboard/inventory', icon: Boxes },
-    { title: 'Categories', url: '/dashboard/categories', icon: Folder },
-    {
-      title: 'Sub-Categories',
-      url: '/dashboard/sub-categories',
-      icon: FolderOpen,
-    },
-    { title: 'Brands', url: '/dashboard/brands', icon: Calendar },
-    { title: 'Product Reviews', url: '/dashboard/reviews', icon: Star },
-    {
-      title: 'Discounts / Coupons',
-      url: '/dashboard/discounts',
-      icon: Percent,
-    },
+    // { title: 'Inventory', url: '/dashboard/inventory', icon: Boxes },
+    // { title: 'Categories', url: '/dashboard/categories', icon: Folder },
+
+    // { title: 'Brands', url: '/dashboard/brands', icon: Calendar },
+    // { title: 'Product Reviews', url: '/dashboard/reviews', icon: Star },
+    // {
+    //   title: 'Discounts / Coupons',
+    //   url: '/dashboard/discounts',
+    //   icon: Percent,
+    // },
   ];
 
   // Users
   const users = [
     { title: 'All Users', url: '/dashboard/users', icon: Users },
     { title: 'Create User', url: '/dashboard/create-user', icon: UserPlus },
-    { title: 'User Roles', url: '/dashboard/roles', icon: ShieldCheck },
-    { title: 'Blocked Users', url: '/dashboard/blocked-users', icon: Slash },
-    { title: 'User Feedback', url: '/dashboard/feedback', icon: MessageCircle },
+    // { title: 'Blocked Users', url: '/dashboard/blocked-users', icon: Slash },
+    // { title: 'User Feedback', url: '/dashboard/feedback', icon: MessageCircle },
+  ];
+
+  // Brance Management
+  const branches = [
+    { title: 'All Branches', url: '/dashboard/all-branch', icon: FolderOpen },
+    { title: 'Add Branch', url: '/dashboard/add-branch', icon: PlusCircle },
+    { title: 'Branch Inventory', url: '/dashboard/branch-inventory', icon: Boxes },
+    { title: 'Branch Sales', url: '/dashboard/branch-sales', icon: FileText },
+    { title: 'Branch Reviews', url: '/dashboard/branch-reviews', icon: Star },
+    { title: 'Branch Discounts', url: '/dashboard/branch-discounts', icon: Percent },
   ];
 
   return (
@@ -154,10 +159,32 @@ export function AppSidebar() {
             <SidebarMenu>
               {dashboards.map((dashboard) => (
                 <SidebarMenuItem key={dashboard.title}>
-                  <SidebarMenuButton asChild >
+                  <SidebarMenuButton asChild>
                     <Link href={dashboard.url}>
                       <dashboard.icon />
                       <span>{dashboard.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+             
+        {/* Branch Management Group */}
+        <SidebarGroup>
+          <SidebarGroupLabel>Branch Management</SidebarGroupLabel>
+          <SidebarGroupAction>
+            <Plus /> <span className='sr-only'>Add Branch</span>
+          </SidebarGroupAction>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {branches.map((branch) => (
+                <SidebarMenuItem key={branch.title}>
+                  <SidebarMenuButton asChild>
+                    <Link href={branch.url}>
+                      <branch.icon />
+                      <span>{branch.title}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -176,7 +203,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {orders.map((order) => (
                 <SidebarMenuItem key={order.title}>
-                  <SidebarMenuButton asChild >
+                  <SidebarMenuButton asChild>
                     <Link href={order.url}>
                       <order.icon />
                       <span>{order.title}</span>
@@ -198,7 +225,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {products.map((project) => (
                 <SidebarMenuItem key={project.title}>
-                  <SidebarMenuButton asChild >
+                  <SidebarMenuButton asChild>
                     <Link href={project.url}>
                       <project.icon />
                       <span>{project.title}</span>
@@ -220,7 +247,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {users.map((user) => (
                 <SidebarMenuItem key={user.title}>
-                  <SidebarMenuButton asChild >
+                  <SidebarMenuButton asChild>
                     <Link href={user.url}>
                       <user.icon />
                       <span>{user.title}</span>
@@ -231,6 +258,8 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+   
+     
 
         {/* End Group */}
       </SidebarContent>

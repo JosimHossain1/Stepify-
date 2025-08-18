@@ -38,35 +38,35 @@ export type Payment = {
   id: string;
   price: number;
   status: 'pending' | 'processing' | 'success' | 'failed';
-  productName: string;
+  branchName: string;
   stock: number;
   createdAt: string; // ISO date string
 };
 
 export const columns: ColumnDef<Payment>[] = [
-  // Product Name
+  // branch Name
   {
-    accessorKey: 'productName',
+    accessorKey: 'branchName',
     header: ({ column }) => {
       return (
         <Button
           variant='ghost'
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
-          Product Name
+          branch Name
           <ArrowUpDown />
         </Button>
       );
     },
     cell: ({ row }) => (
-      <div className='lowercase'>{row.getValue('productName')}</div>
+      <div className='lowercase'>{row.getValue('branchName')}</div>
     ),
   },
 
   // Price
   {
     accessorKey: 'price',
-    header: () => <div>Product Price</div>,
+    header: () => <div>branch Price</div>,
     cell: ({ row }) => {
       const price = parseFloat(row.getValue('price'));
 
@@ -95,7 +95,6 @@ export const columns: ColumnDef<Payment>[] = [
       return <div className='text-right font-medium'>{formatted}</div>;
     },
   },
-
 
   // Action
   {
@@ -129,7 +128,7 @@ export const columns: ColumnDef<Payment>[] = [
   },
 ];
 
-export function ShowProduct({ data }: { data: Payment[] }) {
+export function ShowBranches({ data }: { data: Payment[] }) {
   // States
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -163,10 +162,10 @@ export function ShowProduct({ data }: { data: Payment[] }) {
         <Input
           placeholder='Filter titles...'
           value={
-            (table.getColumn('productName')?.getFilterValue() as string) ?? ''
+            (table.getColumn('branchName')?.getFilterValue() as string) ?? ''
           }
           onChange={(event) =>
-            table.getColumn('productName')?.setFilterValue(event.target.value)
+            table.getColumn('branchName')?.setFilterValue(event.target.value)
           }
           className='max-w-sm'
         />
@@ -286,4 +285,4 @@ export function ShowProduct({ data }: { data: Payment[] }) {
   );
 }
 
-export default ShowProduct;
+export default ShowBranches;
