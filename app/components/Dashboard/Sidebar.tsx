@@ -62,11 +62,11 @@ export function AppSidebar() {
     //   url: '/dashboard/analytics',
     //   icon: BarChart,
     // },
-    // {
-    //   title: 'Reports',
-    //   url: '/dashboard/reports',
-    //   icon: FileBarChart2,
-    // },
+    {
+      title: 'Employee',
+      url: '/dashboard/employee',
+      icon: FileBarChart2,
+    },
   ];
 
   // Orders
@@ -114,11 +114,23 @@ export function AppSidebar() {
   // Brance Management
   const branches = [
     { title: 'All Branches', url: '/dashboard/all-branch', icon: FolderOpen },
-    { title: 'Add Branch', url: '/dashboard/add-branch', icon: PlusCircle },
-    { title: 'Branch Inventory', url: '/dashboard/branch-inventory', icon: Boxes },
+    {
+      title: 'Create Branch',
+      url: '/dashboard/create-branch',
+      icon: PlusCircle,
+    },
+    {
+      title: 'Branch Inventory',
+      url: '/dashboard/branch-inventory',
+      icon: Boxes,
+    },
     { title: 'Branch Sales', url: '/dashboard/branch-sales', icon: FileText },
     { title: 'Branch Reviews', url: '/dashboard/branch-reviews', icon: Star },
-    { title: 'Branch Discounts', url: '/dashboard/branch-discounts', icon: Percent },
+    {
+      title: 'Branch Discounts',
+      url: '/dashboard/branch-discounts',
+      icon: Percent,
+    },
   ];
 
   return (
@@ -170,7 +182,7 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-             
+
         {/* Branch Management Group */}
         <SidebarGroup>
           <SidebarGroupLabel>Branch Management</SidebarGroupLabel>
@@ -258,8 +270,6 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-   
-     
 
         {/* End Group */}
       </SidebarContent>

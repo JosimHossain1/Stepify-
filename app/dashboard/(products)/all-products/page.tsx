@@ -7,7 +7,6 @@ const ProductPage = () => {
 
   const [products, setProducts] = useState([]);
 
-
   // Fetch profuct
   useEffect(() => {
     const fetchProducts = async () => {
