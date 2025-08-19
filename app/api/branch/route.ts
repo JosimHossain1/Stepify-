@@ -1,0 +1,30 @@
+import dbConnection from '@/lib/dbConnect';
+import BranchModel from '@/models/BranchModel';
+import { NextRequest } from 'next/server';
+
+export async function POST(req: NextRequest) {
+  await dbConnection();
+
+  try {
+    const data = await req.json();
+
+    const response = await BranchModel.create(data);
+
+    return new Response(
+      JSON.stringify({
+        success: true,
+        message: 'Branch Created Successfully!',
+        data: response,
+      }),
+      { status: 201 },
+    );
+  } catch (error) {
+    return new Response(
+      JSON.stringify({
+        success: false,
+        message: error,
+      }),
+      { status: 500 },
+    );
+  }
+}
