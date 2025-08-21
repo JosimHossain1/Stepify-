@@ -20,7 +20,7 @@ export async function GET(
 
 // Update data
 
-export async function PATCH(
+export async function PUT(
   req: NextRequest,
   { params }: { params: { id: string } },
 ) {
