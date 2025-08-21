@@ -39,7 +39,7 @@ export async function DELETE(
 }
 
 // Update data by userID
-export async function PATCH(
+export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } },
 ) {
@@ -50,8 +50,11 @@ export async function PATCH(
   await dbConnection();
 
   try {
-    const updatedUser = await UserModel.findByIdAndUpdate(id, { name }, { new: true });
-
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      id,
+      { name },
+      { new: true },
+    );
 
     return new Response(JSON.stringify(updatedUser), { status: 200 });
   } catch (error) {

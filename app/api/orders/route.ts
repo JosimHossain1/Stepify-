@@ -1,22 +1,22 @@
-// Get all products
+// Get all orders
 
 import dbConnection from '@/lib/dbConnect';
-import ProductModel from '@/models/ProductModel';
+import OrderModel from '@/models/OrderModel';
 import { NextRequest } from 'next/server';
 
-// Get all products
+// Get all orders
 export async function GET() {
   await dbConnection();
 
   try {
-    const allProducts = await ProductModel.find();
-    return new Response(JSON.stringify(allProducts), { status: 200 });
+    const allorders = await OrderModel.find();
+    return new Response(JSON.stringify(allorders), { status: 200 });
   } catch (error) {
     console.log(error);
   }
 }
 
-// Add new product
+// Add new order
 
 export async function POST(req: NextRequest) {
   try {
@@ -26,15 +26,15 @@ export async function POST(req: NextRequest) {
     // Connect Database
     await dbConnection();
 
-    // Create new product
-    const addedProduct = await ProductModel.create(data);
+    // Create new order
+    const addedorder = await OrderModel.create(data);
 
     // return response
     return new Response(
       JSON.stringify({
         success: true,
-        message: 'Product Create successfully',
-        data: addedProduct,
+        message: 'Order Create successfully',
+        data: addedorder,
       }),
       {
         status: 201,
@@ -47,8 +47,8 @@ export async function POST(req: NextRequest) {
     return new Response(
       JSON.stringify({
         success: false,
-        message: 'Failed to create product.',
-        error: error
+        message: 'Failed to create order.',
+        error: error,
       }),
       {
         status: 500,
