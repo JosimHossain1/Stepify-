@@ -1,7 +1,7 @@
-import { ShowEmployee } from '@/app/components/Dashboard/employee/ShowEmployee'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
-import React from 'react'
+'use client';
+import { ShowEmployee } from '@/app/components/Dashboard/employee/ShowEmployee';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 const page = () => {
   return (
@@ -9,18 +9,16 @@ const page = () => {
       {/* Create employee button in right side */}
       <div className='flex justify-end mb-4'>
         <Link
+         
           href='/dashboard/employee/create-employee'
         >
-          <Button >
-            Create Employee
-          </Button>
+          <Button  className='cursor-pointer'>Create Employee</Button>
         </Link>
       </div>
 
-     
       <ShowEmployee />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

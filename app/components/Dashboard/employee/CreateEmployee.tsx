@@ -14,25 +14,67 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import axios from 'axios';
 import { PlusCircle } from 'lucide-react';
 import React from 'react';
+import axios from 'axios';
 
 const handleAddemployee = async (e) => {
   e.preventDefault();
 
-  const form = e.target;
-  const employeeName = form.employeeName.value;
-  const price = form.price.value;
-  const stock = form.stock.value;
-  const discount = form.discount.value;
-  const description = form.description.value;
+  // Create random employee ID
+  // const employeeId = `EMP-${Math.floor(Math.random() * 1000)}`;
 
-  const data = { employeeName, price, stock, discount, description };
-  console.log(data);
-  const response = await axios.post('/api/employees', data);
+  try {
+    const form = e.target;
+    const name = form.employeeName.value.trim();
+    const email = form.employeeEmail.value.trim();
+    const phone = form.employeePhone.value.trim();
+    const dateOfBirth = form.employeeDOB.value.trim();
+    const nationalId = form.employeeID.value.trim();
+    const gender = form.gender.value.trim();
+    const maritalStatus = form.maritalStatus.value.trim();
+    const bloodGroup = form.bloodGroup.value.trim();
+    const emergencyContact = form.emergencyContact.value.trim();
+    const nationality = form.nationality.value.trim();
+    const address = form.permanentAddress.value.trim();
+    const jobTitle = form.jobTitle.value.trim();
+    const department = form.department.value.trim();
+    const employmentType = form.employmentType.value.trim();
+    const workLocation = form.workLocation.value.trim();
+    const dateOfJoining = form.joiningDate.value.trim();
+    const reportingManager = form.reportingTo.value.trim();
 
-  console.log(response.data.message);
+    const data = {
+      name,
+      email,
+      phone,
+      dateOfBirth,
+      nationalId,
+      gender,
+      maritalStatus,
+      bloodGroup,
+      emergencyContact,
+      nationality,
+      address,
+      jobTitle,
+      department,
+      employmentType,
+      workLocation,
+      dateOfJoining,
+      reportingManager,
+    };
+
+    const response = await axios.post('/api/employee', data);
+
+    console.log(response.data.message);
+    alert('Employee added successfully!');
+
+    // ✅ reset form
+    form.reset();
+  } catch (error) {
+    console.error('Error adding employee:', error);
+    alert(error || 'Something went wrong!');
+  }
 };
 
 const CreateEmployee = () => {
@@ -56,7 +98,6 @@ const CreateEmployee = () => {
                   type='text'
                   placeholder='Enter Employee Name'
                   className='mt-1 block w-full'
-                  required
                 />
               </div>
               <div>
@@ -67,7 +108,6 @@ const CreateEmployee = () => {
                   type='email'
                   placeholder='Enter Email Address'
                   className='mt-1 block w-full'
-                  required
                 />
               </div>
               <div>
@@ -78,7 +118,6 @@ const CreateEmployee = () => {
                   type='tel'
                   placeholder='Enter Phone Number'
                   className='mt-1 block w-full'
-                  required
                 />
               </div>
               <div>
@@ -89,7 +128,6 @@ const CreateEmployee = () => {
                   type='date'
                   placeholder='Select Date of Birth'
                   className='mt-1 block w-full'
-                  required
                 />
               </div>
               <div>
@@ -100,13 +138,16 @@ const CreateEmployee = () => {
                   type='text'
                   placeholder='Enter National ID or Passport'
                   className='mt-1 block w-full'
-                  required
                 />
               </div>
 
               <div className='grid items-center gap-3 mt-4'>
                 <Label className='mt-3'>Gender</Label>
-                <RadioGroup defaultValue='male' className='flex gap-4'>
+                <RadioGroup
+                  defaultValue='male'
+                  name='gender'
+                  className='flex gap-4'
+                >
                   <div className='flex items-center gap-3'>
                     <RadioGroupItem value='male' id='genderMale' />
                     <Label htmlFor='genderMale'>Male</Label>
@@ -131,7 +172,16 @@ const CreateEmployee = () => {
                   <Label htmlFor='maritalStatus' className='mb-1'>
                     Marital Status
                   </Label>
-                  <Select>
+                  <Select
+                    onValueChange={(value) => {
+                      const input = document.getElementById(
+                        'maritalStatusInput',
+                      ) as HTMLInputElement;
+                      if (input) {
+                        input.value = value;
+                      }
+                    }}
+                  >
                     <SelectTrigger className='w-full'>
                       <SelectValue placeholder='Select Marital Status' />
                     </SelectTrigger>
@@ -143,6 +193,11 @@ const CreateEmployee = () => {
                         <SelectItem value='divorced'>Divorced</SelectItem>
                       </SelectGroup>
                     </SelectContent>
+                    <input
+                      type='hidden'
+                      id='maritalStatusInput'
+                      name='maritalStatus'
+                    />
                   </Select>
                 </div>
                 {/* Blood Group */}
@@ -150,7 +205,16 @@ const CreateEmployee = () => {
                   <Label htmlFor='bloodGroup' className='mb-1'>
                     Blood Group
                   </Label>
-                  <Select>
+                  <Select
+                    onValueChange={(value) => {
+                      const input = document.getElementById(
+                        'bloodGroupInput',
+                      ) as HTMLInputElement;
+                      if (input) {
+                        input.value = value;
+                      }
+                    }}
+                  >
                     <SelectTrigger className='w-full'>
                       <SelectValue placeholder='Select Blood Group' />
                     </SelectTrigger>
@@ -168,6 +232,8 @@ const CreateEmployee = () => {
                       </SelectGroup>
                     </SelectContent>
                   </Select>
+                  {/* hidden input for form submission */}
+                  <input type='hidden' id='bloodGroupInput' name='bloodGroup' />
                 </div>
               </div>
 
@@ -180,19 +246,17 @@ const CreateEmployee = () => {
                     type='tel'
                     placeholder='Emergency Contact'
                     className='mt-1 block w-full'
-                    required
                   />
                 </div>
                 <div className='w-1/2'>
                   {/* Make Gender by select */}
-                  <Label htmlFor='national'>Nationality</Label>
+                  <Label htmlFor='nationality'>Nationality</Label>
                   <Input
-                    id='national'
-                    name='national'
+                    id='nationality'
+                    name='nationality'
                     type='text'
                     placeholder='Enter Nationality'
                     className='mt-1 block w-full'
-                    required
                   />
                 </div>
               </div>
@@ -204,7 +268,6 @@ const CreateEmployee = () => {
                     name='permanentAddress'
                     placeholder='Enter Permanent Address'
                     className='mt-1 block w-full'
-                    required
                   />
                 </div>
               </div>
@@ -223,7 +286,6 @@ const CreateEmployee = () => {
                     type='text'
                     placeholder='Enter Job Title'
                     className='mt-1 block w-full'
-                    required
                   />
                 </div>
                 <div className='w-1/2'>
@@ -234,7 +296,6 @@ const CreateEmployee = () => {
                     type='text'
                     placeholder='Enter Department'
                     className='mt-1 block w-full'
-                    required
                   />
                 </div>
               </div>
@@ -242,14 +303,34 @@ const CreateEmployee = () => {
               <div className='flex gap-2 mt-2'>
                 <div className='w-1/2'>
                   <Label htmlFor='employmentType'>Employment Type</Label>
-                  <Input
-                    id='employmentType'
-                    name='employmentType'
-                    type='text'
-                    placeholder='Full-time / Part-time'
-                    className='mt-1 block w-full'
-                    required
-                  />
+                  <Select
+                    onValueChange={(value) => {
+                      const input = document.getElementById(
+                        'employmentTypeInput',
+                      ) as HTMLInputElement;
+                      if (input) {
+                        input.value = value;
+                      }
+                    }}
+                  >
+                    <SelectTrigger className='w-full'>
+                      <SelectValue placeholder='Select Employment Type' />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectLabel>Emplyment Type</SelectLabel>
+                        <SelectItem value='Full-time'>Full-time</SelectItem>
+                        <SelectItem value='Part-time'>Part-time</SelectItem>
+                        <SelectItem value='Contract'>Contract</SelectItem>
+                        <SelectItem value='Internship'>Internship</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                    <input
+                      type='hidden'
+                      id='employmentTypeInput'
+                      name='employmentType'
+                    />
+                  </Select>
                 </div>
                 <div className='w-1/2'>
                   <Label htmlFor='joiningDate'>Joining Date</Label>
@@ -259,7 +340,6 @@ const CreateEmployee = () => {
                     type='date'
                     placeholder='Select Joining Date'
                     className='mt-1 block w-full'
-                    required
                   />
                 </div>
               </div>
@@ -273,7 +353,6 @@ const CreateEmployee = () => {
                     type='text'
                     placeholder='Enter Reporting Manager'
                     className='mt-1 block w-full'
-                    required
                   />
                 </div>
                 <div className='w-1/2'>
@@ -284,7 +363,6 @@ const CreateEmployee = () => {
                     type='text'
                     placeholder='Enter Work Location'
                     className='mt-1 block w-full'
-                    required
                   />
                 </div>
               </div>
@@ -350,7 +428,6 @@ const CreateEmployee = () => {
                     type='number'
                     placeholder='Enter Basic Salary'
                     className='mt-1 block w-full'
-                    required
                   />
                 </div>
                 <div className='w-1/2 pr-2'>
@@ -361,7 +438,6 @@ const CreateEmployee = () => {
                     type='number'
                     placeholder='Employee Allowances'
                     className='mt-1 block w-full'
-                    required
                   />
                 </div>
               </div>
@@ -423,7 +499,6 @@ const CreateEmployee = () => {
                     type='text'
                     placeholder='Employee User ID'
                     className='mt-1 block w-full'
-                    required
                   />
                 </div>
                 <div className='w-1/2 pr-2'>
@@ -434,7 +509,6 @@ const CreateEmployee = () => {
                     type='password'
                     placeholder='Employee Password'
                     className='mt-1 block w-full'
-                    required
                   />
                 </div>
               </div>

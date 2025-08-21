@@ -10,22 +10,20 @@ const EmployeeSchema = new Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
     },
     phone: {
       type: String,
       required: true,
     },
     dateOfBirth: {
-      type: Date,
+      type: String,
       required: true,
     },
     nationalId: {
       type: String,
       required: true,
-      unique: true,
     },
-    sex: {
+    gender: {
       type: String,
       enum: ['male', 'female', 'other'],
       required: true,
@@ -54,12 +52,11 @@ const EmployeeSchema = new Schema(
       required: true,
     },
 
-    // Job Information
-    employeeId: {
-      type: String,
-      required: true,
-      unique: true,
-    },
+    // // Job Information
+    // employeeId: {
+    //   type: String,
+    //   required: true,
+    // },
     jobTitle: {
       type: String,
       required: true,
@@ -88,60 +85,60 @@ const EmployeeSchema = new Schema(
       required: true,
     },
 
-    // Employement Records
-    status: {
-      type: String,
-      enum: ['Active', 'Inactive', 'On Leave'],
-      default: 'Active',
-    },
+    // // // Employement Records
+    // // status: {
+    // //   type: String,
+    // //   enum: ['Active', 'Inactive', 'On Leave'],
+    // //   default: 'Active',
+    // // },
 
-    profilePicture: {
-      type: String,
-      default: null,
-    },
-    resume: {
-      type: String,
-      default: null,
-    },
-    previousCompany: {
-      type: String,
-    },
-    education: {
-      type: String,
-    },
+    // // profilePicture: {
+    // //   type: String,
+    // //   default: null,
+    // // },
+    // // resume: {
+    // //   type: String,
+    // //   default: null,
+    // // },
+    // previousCompany: {
+    //   type: String,
+    // },
+    // education: {
+    //   type: String,
+    // },
 
-    // Salary and Payroll Information
+    // // Salary and Payroll Information
 
-    salary: {
-      type: Number,
-      required: true,
-    },
-    allowances: {
-      type: String,
-    },
+    // salary: {
+    //   type: Number,
+    //   required: true,
+    // },
+    // allowances: {
+    //   type: String,
+    // },
 
-    // Branch
-    branch: {
-      type: String,
-    },
+    // // // Branch
+    // // branch: {
+    // //   type: String,
+    // // },
 
-    // System and Access control
-    roles: {
-      type: String,
-      enum: ['admin', 'manager', 'salesman'],
-    },
+    // // // System and Access control
+    // // roles: {
+    // //   type: String,
+    // //   enum: ['admin', 'manager', 'salesman'],
+    // // },
 
-    // Login Credentials
+    // // Login Credentials
 
-    userId: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
+    // userId: {
+    //   type: String,
+    //   required: true,
+    //   unique: true,
+    // },
+    // password: {
+    //   type: String,
+    //   required: true,
+    // },
   },
   { timestamps: true },
 );
