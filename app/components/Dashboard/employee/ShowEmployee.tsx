@@ -194,7 +194,7 @@ export function ShowEmployee() {
       }
     };
     fetchEmployees();
-  }, [employees]);
+  }, []);
 
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(

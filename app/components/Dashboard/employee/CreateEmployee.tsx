@@ -77,7 +77,7 @@ const handleAddemployee = async (e) => {
   }
 };
 
-const CreateEmployee = () => {
+const CreateEmployee = ({ roles }) => {
   return (
     // Add employees form
     <div className='mx-auto p-6 bg-white shadow-md rounded-lg mt-5'>
@@ -473,17 +473,11 @@ const CreateEmployee = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    {/* SelectLebel for employee */}
-                    <SelectLabel>Roles</SelectLabel>
-                    <SelectItem value='admin'>Admin</SelectItem>
-                    <SelectItem value='manager'>Manager</SelectItem>
-                    <SelectItem value='employee'>Employee</SelectItem>
-                    <SelectItem value='hr'>HR</SelectItem>
-                    <SelectItem value='accountant'>Accountant</SelectItem>
-                    <SelectItem value='customer'>Customer</SelectItem>
-                    <SelectItem value='vendor'>Vendor</SelectItem>
-                    <SelectItem value='support'>Support</SelectItem>
-                    <SelectItem value='guest'>Guest</SelectItem>
+                    {roles.map((role) => (
+                      <SelectItem key={role.id} value={role.roleName}>
+                        {role.roleName.charAt(0).toUpperCase() + role.roleName.slice(1)}
+                      </SelectItem>
+                    ))}
                   </SelectGroup>
                 </SelectContent>
               </Select>

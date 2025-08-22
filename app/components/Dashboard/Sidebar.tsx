@@ -17,7 +17,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
+
 import {
+  Shield,
+  GitBranch,
+  Building,
   Calendar,
   ChevronDown,
   ChevronUp,
@@ -57,11 +61,11 @@ export function AppSidebar() {
       url: '/dashboard',
       icon: LayoutDashboard,
     },
-    // {
-    //   title: 'Analytics',
-    //   url: '/dashboard/analytics',
-    //   icon: BarChart,
-    // },
+    {
+      title: 'Analytics',
+      url: '/dashboard/analytics',
+      icon: BarChart,
+    },
     {
       title: 'Employee',
       url: '/dashboard/employee',
@@ -72,15 +76,15 @@ export function AppSidebar() {
   // Orders
   const orders = [
     { title: 'All Orders', url: '/dashboard/orders', icon: FileText },
-    // { title: 'Pending', url: '/dashboard/orders/pending', icon: Clock },
-    // { title: 'Shipped', url: '/dashboard/orders/shipped', icon: Truck },
-    // {
-    //   title: 'Delivered',
-    //   url: '/dashboard/orders/delivered',
-    //   icon: CheckCircle,
-    // },
-    // { title: 'Cancelled', url: '/dashboard/orders/cancelled', icon: Ban },
-    // { title: 'Refunds', url: '/dashboard/refunds', icon: RotateCcw },
+    { title: 'Pending', url: '/dashboard/orders/pending', icon: Clock },
+    { title: 'Shipped', url: '/dashboard/orders/shipped', icon: Truck },
+    {
+      title: 'Delivered',
+      url: '/dashboard/orders/delivered',
+      icon: CheckCircle,
+    },
+    { title: 'Cancelled', url: '/dashboard/orders/cancelled', icon: Ban },
+    { title: 'Refunds', url: '/dashboard/refunds', icon: RotateCcw },
   ];
 
   // Products
@@ -91,24 +95,24 @@ export function AppSidebar() {
       icon: ShoppingBasketIcon,
     },
     { title: 'Add Product', url: '/dashboard/add-product', icon: PlusCircle },
-    // { title: 'Inventory', url: '/dashboard/inventory', icon: Boxes },
-    // { title: 'Categories', url: '/dashboard/categories', icon: Folder },
+    { title: 'Inventory', url: '/dashboard/inventory', icon: Boxes },
+    { title: 'Categories', url: '/dashboard/categories', icon: Folder },
 
-    // { title: 'Brands', url: '/dashboard/brands', icon: Calendar },
-    // { title: 'Product Reviews', url: '/dashboard/reviews', icon: Star },
-    // {
-    //   title: 'Discounts / Coupons',
-    //   url: '/dashboard/discounts',
-    //   icon: Percent,
-    // },
+    { title: 'Brands', url: '/dashboard/brands', icon: Calendar },
+    { title: 'Product Reviews', url: '/dashboard/reviews', icon: Star },
+    {
+      title: 'Discounts / Coupons',
+      url: '/dashboard/discounts',
+      icon: Percent,
+    },
   ];
 
   // Users
   const users = [
     { title: 'All Users', url: '/dashboard/users', icon: Users },
     { title: 'Create User', url: '/dashboard/create-user', icon: UserPlus },
-    // { title: 'Blocked Users', url: '/dashboard/blocked-users', icon: Slash },
-    // { title: 'User Feedback', url: '/dashboard/feedback', icon: MessageCircle },
+    { title: 'Blocked Users', url: '/dashboard/blocked-users', icon: Slash },
+    { title: 'User Feedback', url: '/dashboard/feedback', icon: MessageCircle },
   ];
 
   // Brance Management
@@ -130,6 +134,25 @@ export function AppSidebar() {
       title: 'Branch Discounts',
       url: '/dashboard/branch-discounts',
       icon: Percent,
+    },
+  ];
+  // Management (Create options)
+
+  const management = [
+    {
+      title: 'Create Role',
+      url: '/dashboard/roles/create',
+      icon: Shield,
+    },
+    {
+      title: 'Create Branch',
+      url: '/dashboard/branches/create',
+      icon: GitBranch,
+    },
+    {
+      title: 'Create Department',
+      url: '/dashboard/departments/create',
+      icon: Building,
     },
   ];
 
@@ -236,6 +259,27 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {products.map((project) => (
+                <SidebarMenuItem key={project.title}>
+                  <SidebarMenuButton asChild>
+                    <Link href={project.url}>
+                      <project.icon />
+                      <span>{project.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>{' '}
+        </SidebarGroup>
+        {/* Product Group */}
+        <SidebarGroup>
+          <SidebarGroupLabel>Create Entities</SidebarGroupLabel>
+          <SidebarGroupAction>
+            <Plus /> <span className='sr-only'>Add Project</span>
+          </SidebarGroupAction>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {management.map((project) => (
                 <SidebarMenuItem key={project.title}>
                   <SidebarMenuButton asChild>
                     <Link href={project.url}>
