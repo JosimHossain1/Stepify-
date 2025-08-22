@@ -1,8 +1,11 @@
+import CreateBranch from '@/app/components/Dashboard/branches/CreateBranch'
 import React from 'react'
 
 const CreateBranchPage = () => {
   return (
-    <div>CreateBranchPage</div>
+    <div>
+      <CreateBranch />
+    </div>
   )
 }
 

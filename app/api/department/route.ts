@@ -1,16 +1,17 @@
 import dbConnection from '@/lib/dbConnect';
-import RoleModel from '@/models/RolesModel';
+import DepartmentModel from '@/models/DepartmentModel';
+
 import { NextRequest } from 'next/server';
 
 export async function GET(req: NextRequest) {
   await dbConnection();
 
   try {
-    const rules = await RoleModel.find();
+    const rules = await DepartmentModel.find();
     return new Response(
       JSON.stringify({
         success: true,
-        message: 'Roles Goted',
+        message: 'Departments Goted',
         data: rules,
       }),
     );
@@ -25,21 +26,21 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// POST Roles
+// POST Departments
 
 export async function POST(req: NextRequest) {
   await dbConnection();
   const data = await req.json();
 
   try {
-    const createdRole = await RoleModel.create(data);
+    const createdDepartment = await DepartmentModel.create(data);
     return new Response(
       JSON.stringify({
         success: true,
-        message: 'Role Created Successfully!',
-        data: createdRole,
+        message: 'Department Created Successfully!',
+        data: createdDepartment,
       }),
-      { status: 201},
+      { status: 201 },
     );
   } catch (error) {
     return new Response(

@@ -141,7 +141,7 @@ export function AppSidebar() {
   const management = [
     {
       title: 'Create Role',
-      url: '/dashboard/roles/create',
+      url: '/dashboard/roles/create-role',
       icon: Shield,
     },
     {
@@ -151,7 +151,7 @@ export function AppSidebar() {
     },
     {
       title: 'Create Department',
-      url: '/dashboard/departments/create',
+      url: '/dashboard/departments/create-depratment',
       icon: Building,
     },
   ];

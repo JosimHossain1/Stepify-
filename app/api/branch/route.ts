@@ -25,10 +25,10 @@ export async function GET() {
 
 // POST all datas
 export async function POST(req: NextRequest) {
+  const data = await req.json();
   await dbConnection();
 
   try {
-    const data = await req.json();
 
     const response = await BranchModel.create(data);
 

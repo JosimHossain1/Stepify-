@@ -46,54 +46,54 @@ export type Payment = {
 export const columns: ColumnDef<Payment>[] = [
   // branch Name
   {
-    accessorKey: 'branchName',
+    accessorKey: 'name',
     header: ({ column }) => {
       return (
         <Button
           variant='ghost'
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
-          branch Name
-          <ArrowUpDown />
+          Branch Name
+        </Button>
+      );
+    },
+    cell: ({ row }) => <div className='lowercase'>{row.getValue('name')}</div>,
+  },
+
+  //  Location
+  {
+    accessorKey: 'location',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant='ghost'
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Branch Location
         </Button>
       );
     },
     cell: ({ row }) => (
-      <div className='lowercase'>{row.getValue('branchName')}</div>
+      <div className='lowercase'>{row.getValue('location')}</div>
     ),
   },
 
-  // Price
+  // Branch Manager
   {
-    accessorKey: 'price',
-    header: () => <div>branch Price</div>,
-    cell: ({ row }) => {
-      const price = parseFloat(row.getValue('price'));
-
-      // Format the price as a dollar price
-      const formatted = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-      }).format(price);
-
-      return <div className=' font-medium'>{formatted}</div>;
+    accessorKey: 'branchHead',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant='ghost'
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Branch Manager
+        </Button>
+      );
     },
-  },
-  // Stock
-  {
-    accessorKey: 'stock',
-    header: () => <div className='text-right'>Available Stock</div>,
-    cell: ({ row }) => {
-      const price = parseFloat(row.getValue('price'));
-
-      // Format the price as a dollar price
-      const formatted = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-      }).format(price);
-
-      return <div className='text-right font-medium'>{formatted}</div>;
-    },
+    cell: ({ row }) => (
+      <div className='lowercase'>{row.getValue('branchHead')}</div>
+    ),
   },
 
   // Action
@@ -161,11 +161,9 @@ export function ShowBranches({ data }: { data: Payment[] }) {
         {/* Filter input box */}
         <Input
           placeholder='Filter titles...'
-          value={
-            (table.getColumn('branchName')?.getFilterValue() as string) ?? ''
-          }
+          value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
           onChange={(event) =>
-            table.getColumn('branchName')?.setFilterValue(event.target.value)
+            table.getColumn('name')?.setFilterValue(event.target.value)
           }
           className='max-w-sm'
         />
