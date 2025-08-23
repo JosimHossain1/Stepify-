@@ -113,11 +113,11 @@ export const columns: ColumnDef<Payment>[] = [
 
   // Sex column
   {
-    accessorKey: 'sex',
+    accessorKey: 'gender',
     header: () => <div className='text-right'> Gender</div>,
     cell: ({ row }) => {
-      row.getValue('sex');
-      return <div className='text-right'>{row.getValue('sex')}</div>;
+      row.getValue('gender');
+      return <div className='text-right'>{row.getValue('gender')}</div>;
     },
   },
 
@@ -132,10 +132,10 @@ export const columns: ColumnDef<Payment>[] = [
   },
   // Salary Amount column
   {
-    accessorKey: 'salary',
+    accessorKey: 'basicSalary',
     header: () => <div className='text-right'>Salary</div>,
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue('salary'));
+      const amount = parseFloat(row.getValue('basicSalary'));
 
       // Format the amount as a dollar amount
       const formatted = new Intl.NumberFormat('en-US', {
@@ -168,7 +168,9 @@ export const columns: ColumnDef<Payment>[] = [
               Copy payment ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem><Link href="">View customer</Link></DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href=''>View customer</Link>
+            </DropdownMenuItem>
             <DropdownMenuItem>View payment details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

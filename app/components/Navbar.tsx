@@ -1,32 +1,34 @@
-import Link from 'next/link';
-import React from 'react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Heart, ShoppingBag, Search } from 'lucide-react';
 
-const Navbar = () => {
+export default function Navbar() {
   return (
-    <div>
-      {/* Make navbar with Modern way with tailwind and nextjs modern syntax */}
-      <nav className='bg-gray-800 p-4'>
-        <div className='container mx-auto flex justify-between items-center'>
-          <div className='text-white text-lg font-bold'>Brand</div>
-          <ul className='flex space-x-4'>
-            <Link href='/' className='text-white hover:text-gray-300'>
-              Home
-            </Link>
-            <Link href='/dashboard' className='text-white hover:text-gray-300'>
-              Dashboard
-            </Link>
-            <Link href='/about' className='text-white hover:text-gray-300'>
-              About
-            </Link>
-            <Link href='/contact' className='text-white hover:text-gray-300'>
-              Contact
-            </Link>
-          </ul>
-        </div>
-      </nav>
-      {/* Add some content to the page */}
-    </div>
-  );
-};
+    <header
+      className='flex w-[80%] mx-auto mt-4  items-center justify-between mb-8 rounded-full shadow border border-gray-500 py-2 px-8 backdrop-blur-2xl
+'
+    >
+      <div className='text-2xl font-bold'>Stepify.</div>
 
-export default Navbar;
+      <div className='flex items-center gap-2'>
+        <Input placeholder='Search products...' className='w-72' />
+        <Button size='icon' variant='outline'>
+          <Search />
+        </Button>
+      </div>
+
+      <div className='flex items-center gap-4'>
+        <Button size='icon' variant='ghost'>
+          <ShoppingBag />
+        </Button>
+        <Button size='icon' variant='ghost'>
+          <Heart />
+        </Button>
+        <Avatar>
+          <AvatarImage src='https://i.pravatar.cc/40' />
+        </Avatar>
+      </div>
+    </header>
+  );
+}

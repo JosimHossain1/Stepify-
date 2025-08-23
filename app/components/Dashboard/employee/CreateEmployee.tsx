@@ -24,46 +24,68 @@ const handleAddemployee = async (e) => {
   // Create random employee ID
   // const employeeId = `EMP-${Math.floor(Math.random() * 1000)}`;
 
+  const form = e.target;
+  const name = form.employeeName.value.trim();
+  const email = form.employeeEmail.value.trim();
+  const phone = form.employeePhone.value.trim();
+  const dateOfBirth = form.employeeDOB.value.trim();
+  const nationalId = form.employeeID.value.trim();
+  const gender = form.gender.value.trim();
+
+  const maritalStatus = form.maritalStatus.value.trim();
+  const bloodGroup = form.bloodGroup.value.trim();
+  const emergencyContact = form.emergencyContact.value.trim();
+  const nationality = form.nationality.value.trim();
+  const address = form.permanentAddress.value.trim();
+
+  const jobTitle = form.jobTitle.value.trim();
+  const department = form.department.value.trim();
+  const employmentType = form.employmentType.value.trim();
+  const dateOfJoining = form.joiningDate.value.trim();
+  const reportingManager = form.reportingTo.value.trim();
+  const workLocation = form.workLocation.value.trim();
+
+  const previousCompany = form.previousCompany.value.trim();
+  const education = form.education.value.trim();
+
+  const basicSalary = form.basicSalary.value.trim();
+  const allowances = form.allowances.value.trim();
+
+  const branch = form.branch.value.trim();
+  const role = form.role.value.trim();
+  const userId = form.userId.value.trim();
+  const password = form.password.value.trim();
+
+  const data = {
+    name,
+    email,
+    phone,
+    dateOfBirth,
+    nationalId,
+    gender,
+    maritalStatus,
+    bloodGroup,
+    emergencyContact,
+    nationality,
+    address,
+    jobTitle,
+    department,
+    employmentType,
+    dateOfJoining,
+    reportingManager,
+    workLocation,
+    previousCompany,
+    education,
+    basicSalary,
+    allowances,
+    branch,
+    role,
+    userId,
+    password,
+  };
+
+  console.log(data);
   try {
-    const form = e.target;
-    const name = form.employeeName.value.trim();
-    const email = form.employeeEmail.value.trim();
-    const phone = form.employeePhone.value.trim();
-    const dateOfBirth = form.employeeDOB.value.trim();
-    const nationalId = form.employeeID.value.trim();
-    const gender = form.gender.value.trim();
-    const maritalStatus = form.maritalStatus.value.trim();
-    const bloodGroup = form.bloodGroup.value.trim();
-    const emergencyContact = form.emergencyContact.value.trim();
-    const nationality = form.nationality.value.trim();
-    const address = form.permanentAddress.value.trim();
-    const jobTitle = form.jobTitle.value.trim();
-    const department = form.department.value.trim();
-    const employmentType = form.employmentType.value.trim();
-    const workLocation = form.workLocation.value.trim();
-    const dateOfJoining = form.joiningDate.value.trim();
-    const reportingManager = form.reportingTo.value.trim();
-
-    const data = {
-      name,
-      email,
-      phone,
-      dateOfBirth,
-      nationalId,
-      gender,
-      maritalStatus,
-      bloodGroup,
-      emergencyContact,
-      nationality,
-      address,
-      jobTitle,
-      department,
-      employmentType,
-      workLocation,
-      dateOfJoining,
-      reportingManager,
-    };
-
     const response = await axios.post('/api/employee', data);
 
     console.log(response.data.message);
@@ -73,11 +95,10 @@ const handleAddemployee = async (e) => {
     form.reset();
   } catch (error) {
     console.error('Error adding employee:', error);
-    alert(error || 'Something went wrong!');
   }
 };
 
-const CreateEmployee = ({ roles }) => {
+const CreateEmployee = ({ roles, departments, branches }) => {
   return (
     // Add employees form
     <div className='mx-auto p-6 bg-white shadow-md rounded-lg mt-5'>
@@ -289,20 +310,48 @@ const CreateEmployee = ({ roles }) => {
                   />
                 </div>
                 <div className='w-1/2'>
-                  <Label htmlFor='department'>Department</Label>
-                  <Input
-                    id='department'
-                    name='department'
-                    type='text'
-                    placeholder='Enter Department'
-                    className='mt-1 block w-full'
-                  />
+                  <Label htmlFor='departmentInput' className='mb-1'>
+                    Department
+                  </Label>
+                  <Select
+                    onValueChange={(value) => {
+                      const input = document.getElementById(
+                        'departmentInput',
+                      ) as HTMLInputElement;
+                      if (input) {
+                        input.value = value;
+                      }
+                    }}
+                  >
+                    <SelectTrigger className='w-full'>
+                      <SelectValue placeholder='Select Department' />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectLabel>Department</SelectLabel>
+
+                        {departments.map((department) => (
+                          <SelectItem
+                            key={department.id}
+                            value={department.departmentName}
+                          >
+                            {department.departmentName.charAt(0).toUpperCase() +
+                              department.departmentName.slice(1)}
+                          </SelectItem>
+                        ))}
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                  {/* hidden input for form submission */}
+                  <input type='hidden' id='departmentInput' name='department' />
                 </div>
               </div>
 
               <div className='flex gap-2 mt-2'>
                 <div className='w-1/2'>
-                  <Label htmlFor='employmentType'>Employment Type</Label>
+                  <Label htmlFor='employmentType' className='mb-1'>
+                    Employment Type
+                  </Label>
                   <Select
                     onValueChange={(value) => {
                       const input = document.getElementById(
@@ -444,30 +493,48 @@ const CreateEmployee = ({ roles }) => {
             </Card>
             <Card className='p-4 bg-gray-50 mt-4'>
               <Label>🏢 Branch</Label>
-              <Select>
+              <Select
+                onValueChange={(value) => {
+                  const input = document.getElementById(
+                    'branchInput',
+                  ) as HTMLInputElement;
+                  if (input) {
+                    input.value = value;
+                  }
+                }}
+              >
                 <SelectTrigger className='w-full'>
                   <SelectValue placeholder='Select Branch' />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    <SelectLabel>Branches</SelectLabel>
-                    <SelectItem value='head-office'>Head Office</SelectItem>
-                    <SelectItem value='dhaka'>Dhaka</SelectItem>
-                    <SelectItem value='chittagong'>Chittagong</SelectItem>
-                    <SelectItem value='rajshahi'>Rajshahi</SelectItem>
-                    <SelectItem value='khulna'>Khulna</SelectItem>
-                    <SelectItem value='sylhet'>Sylhet</SelectItem>
-                    <SelectItem value='barishal'>Barishal</SelectItem>
-                    <SelectItem value='rangpur'>Rangpur</SelectItem>
-                    <SelectItem value='mymensingh'>Mymensingh</SelectItem>
+                    <SelectLabel>Department</SelectLabel>
+
+                    {branches.map((branch) => (
+                      <SelectItem key={branch.id} value={branch.name}>
+                        {branch.name.charAt(0).toUpperCase() +
+                          branch.name.slice(1)}
+                      </SelectItem>
+                    ))}
                   </SelectGroup>
                 </SelectContent>
               </Select>
+              {/* hidden input for form submission */}
+              <input type='hidden' id='branchInput' name='branch' />
             </Card>
             {/*  System and Access control */}
             <Card className='p-4 bg-gray-50 mt-4'>
               <Label>⚙️ System & Access Control</Label>
-              <Select>
+              <Select
+                onValueChange={(value) => {
+                  const input = document.getElementById(
+                    'roleInput',
+                  ) as HTMLInputElement;
+                  if (input) {
+                    input.value = value;
+                  }
+                }}
+              >
                 <SelectTrigger className='w-full'>
                   <SelectValue placeholder='Roles' />
                 </SelectTrigger>
@@ -475,11 +542,13 @@ const CreateEmployee = ({ roles }) => {
                   <SelectGroup>
                     {roles.map((role) => (
                       <SelectItem key={role.id} value={role.roleName}>
-                        {role.roleName.charAt(0).toUpperCase() + role.roleName.slice(1)}
+                        {role.roleName.charAt(0).toUpperCase() +
+                          role.roleName.slice(1)}
                       </SelectItem>
                     ))}
                   </SelectGroup>
                 </SelectContent>
+                <input type='hidden' id='roleInput' name='role' />
               </Select>
 
               {/* Login Credential */}

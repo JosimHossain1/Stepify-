@@ -11,6 +11,8 @@ type UserRole = {
 
 const CreateEmployeePage = () => {
   const [userRole, setUserRole] = useState<UserRole[]>([]);
+  const [departments, setDepartments] = useState<UserRole[]>([]);
+  const [branches, setBranches] = useState<UserRole[]>([]);
   // Get user role from database
 
   useEffect(() => {
@@ -19,10 +21,24 @@ const CreateEmployeePage = () => {
       setUserRole(roles.data.data)
     };
     userRole();
+
+    // Departments
+    const departments = async () => {
+      const departments = await axios.get('/api/department');
+      setDepartments(departments.data.data)
+    };
+    departments();
+
+    // Branches
+    const branches = async () => {
+      const branches = await axios.get('/api/branch');
+      setBranches(branches.data.data)
+    }
+    branches();
   }, []);
   return (
     <div>
-      <CreateEmployee roles = {userRole} />
+      <CreateEmployee roles = {userRole} departments={departments} branches={branches} />
     </div>
   );
 };

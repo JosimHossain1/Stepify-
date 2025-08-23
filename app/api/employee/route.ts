@@ -2,18 +2,19 @@ import dbConnection from '@/lib/dbConnect';
 import EmployeeModel from '@/models/EmployeeModel';
 import { NextRequest } from 'next/server';
 
-
-export async function GET(_req : NextRequest){
-  await dbConnection()
+export async function GET(_req: NextRequest) {
+  await dbConnection();
 
   try {
-    const allEmployee = await EmployeeModel.find()
-    return new Response(JSON.stringify(allEmployee), {status : 200})
+    const allEmployee = await EmployeeModel.find();
+    return new Response(JSON.stringify(allEmployee), { status: 200 });
   } catch (error) {
-    return new Response(JSON.stringify({
-      success : false,
-      message : error
-    }))
+    return new Response(
+      JSON.stringify({
+        success: false,
+        message: error,
+      }),
+    );
   }
 }
 

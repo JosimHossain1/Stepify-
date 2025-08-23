@@ -151,7 +151,7 @@ export function AppSidebar() {
     },
     {
       title: 'Create Department',
-      url: '/dashboard/departments/create-depratment',
+      url: '/dashboard/departments/create-department',
       icon: Building,
     },
   ];

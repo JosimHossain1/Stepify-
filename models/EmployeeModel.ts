@@ -52,22 +52,24 @@ const EmployeeSchema = new Schema(
       required: true,
     },
 
-    // // Job Information
-    // employeeId: {
-    //   type: String,
-    //   required: true,
-    // },
     jobTitle: {
       type: String,
       required: true,
     },
-    depratment: {
+    department: {
       type: String,
-      required: true,
     },
     employmentType: {
       type: String,
       enum: ['Full-time', 'Part-time', 'Contract', 'Internship'],
+      required: true,
+    },
+    dateOfJoining: {
+      type: Date,
+      required: true,
+    },
+    reportingManager: {
+      type: String,
       required: true,
     },
 
@@ -75,70 +77,45 @@ const EmployeeSchema = new Schema(
       type: String,
       required: true,
     },
-    dateOfJoining: {
-      type: Date,
-      required: true,
-    },
 
-    reportingManager: {
+    previousCompany: {
       type: String,
-      required: true,
     },
 
-    // // // Employement Records
-    // // status: {
-    // //   type: String,
-    // //   enum: ['Active', 'Inactive', 'On Leave'],
-    // //   default: 'Active',
-    // // },
+    education: {
+      type: String,
+    },
 
-    // // profilePicture: {
-    // //   type: String,
-    // //   default: null,
-    // // },
-    // // resume: {
-    // //   type: String,
-    // //   default: null,
-    // // },
-    // previousCompany: {
-    //   type: String,
-    // },
-    // education: {
-    //   type: String,
-    // },
+    //Salary and Payroll Information
 
-    // // Salary and Payroll Information
+    basicSalary: {
+      type: Number,
+      required: true,
+    },
+    allowances: {
+      type: String,
+    },
 
-    // salary: {
-    //   type: Number,
-    //   required: true,
-    // },
-    // allowances: {
-    //   type: String,
-    // },
-
-    // // // Branch
-    // // branch: {
-    // //   type: String,
-    // // },
+    // Branch
+    branch: {
+      type: String,
+    },
 
     // // // System and Access control
-    // // roles: {
-    // //   type: String,
-    // //   enum: ['admin', 'manager', 'salesman'],
-    // // },
+    role: {
+      type: String,
+    },
 
     // // Login Credentials
 
-    // userId: {
-    //   type: String,
-    //   required: true,
-    //   unique: true,
-    // },
-    // password: {
-    //   type: String,
-    //   required: true,
-    // },
+    userId: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true },
 );

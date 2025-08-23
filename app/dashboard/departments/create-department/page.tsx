@@ -19,7 +19,7 @@ const handleCreateDepartment = async (e) => {
     if (response.status === 201) {
       alert('department Created successfully!');
       form.reset();
-    } 
+    }
   } catch (error) {
     console.error('Error adding department:', error);
     alert(error || 'Something went wrong!');
@@ -28,7 +28,7 @@ const handleCreateDepartment = async (e) => {
 
 const CreateDepartment = () => {
   return (
-    // Add depratments form
+    // Add department form
     <div className='mx-auto md:w-1/2 p-6 bg-white rounded-lg mt-5'>
       <form className='' onSubmit={handleCreateDepartment}>
         <Card className='p-4 bg-gray-50'>
@@ -39,16 +39,13 @@ const CreateDepartment = () => {
               id='departmentName'
               name='departmentName'
               type='text'
-              placeholder='Write Depratment Name'
+              placeholder='Write department Name'
               className='block w-full mt-2'
             />
           </div>
 
-          <Button
-            type='submit'
-            className='cursor-pointer w-fit self-end'
-          >
-            Create depratment
+          <Button type='submit' className='cursor-pointer w-fit self-end'>
+            Create Departmenent
           </Button>
         </Card>
       </form>
