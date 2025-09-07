@@ -117,7 +117,8 @@ export function AppSidebar() {
 
   // Brance Management
   const branches = [
-    { title: 'All Branches', url: '/dashboard/all-branch', icon: FolderOpen },
+    { title: 'All Branches', url: '/dashboard/all-branch', icon: GitBranch },
+
     {
       title: 'Create Branch',
       url: '/dashboard/create-branch',
@@ -144,11 +145,7 @@ export function AppSidebar() {
       url: '/dashboard/roles/create-role',
       icon: Shield,
     },
-    {
-      title: 'Create Branch',
-      url: '/dashboard/branches/create',
-      icon: GitBranch,
-    },
+
     {
       title: 'Create Department',
       url: '/dashboard/departments/create-department',

@@ -6,12 +6,17 @@ const CategorySchema = new Schema(
       type: String,
       required: true,
       trim: true,
-      unique: true,
+      unique: true
     },
     slug: {  
       type: String,
-      default: null,
+      default: null
     },
+    parentCategory : {
+      type : String,
+      required : false,
+      default : null
+    }
   },
   { timestamps: true },
 );

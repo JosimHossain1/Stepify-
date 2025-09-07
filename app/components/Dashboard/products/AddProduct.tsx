@@ -9,7 +9,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
@@ -17,11 +16,32 @@ import { Textarea } from '@/components/ui/textarea';
 import axios from 'axios';
 import { PlusCircle } from 'lucide-react';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import CreateCategory from '../categories/CreateCategory';
 
-const handleAddProduct = async (e) => {
+
+
+const AddProduct = () => {
+  // Category data from API
+  const [categories, setCategories] = useState([]);
+  const [openCreateCategory, setOpenCreateCategory] = useState(false);
+
+  useEffect(() => {
+    // Fetch categories from API
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get('/api/categories');
+        console.log(response.data);
+        setCategories(response.data);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+    fetchCategories();
+  }, []);
+
+  const handleAddProduct = async (e) => {
   e.preventDefault();
-
 
   const form = e.target;
   const productName = form.productName.value;
@@ -29,15 +49,15 @@ const handleAddProduct = async (e) => {
   const stock = form.stock.value;
   const discount = form.discount.value;
   const description = form.description.value;
+  const category = form.category.value;
 
-  const data = { productName, price, stock, discount, description };
-  console.log(data)
+  const data = { productName, price, stock, discount, description, category };
+  console.log(data);
   const response = await axios.post('/api/products', data);
 
   console.log(response.data.message);
 };
 
-const AddProduct = () => {
   return (
     // Add products form
     <div className='max-w-[80%] mx-auto p-6 bg-white shadow-md rounded-lg mt-5'>
@@ -226,36 +246,50 @@ const AddProduct = () => {
               <Label>Category</Label>
 
               <Label htmlFor='description'>Product Category</Label>
-              <Select>
+              <Select
+                  onValueChange={(value) => {
+                      const input = document.getElementById(
+                        'categoryInput',
+                      ) as HTMLInputElement;
+                      if (input) {
+                        input.value = value;
+                      }
+                    }}
+              >
                 <SelectTrigger className='w-full'>
                   <SelectValue placeholder='Select a category' />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    {/* SelectLebel for product */}
-                    <SelectLabel>Shoes</SelectLabel>
-                    <SelectItem value='sneakers'>Sneakers</SelectItem>
-                    <SelectItem value='boots'>Boots</SelectItem>
-                    <SelectItem value='sandals'>Sandals</SelectItem>
-                    <SelectItem value='loafers'>Loafers</SelectItem>
-                    <SelectItem value='heels'>Heels</SelectItem>
-                    <SelectItem value='flats'>Flats</SelectItem>
-                    <SelectItem value='clogs'>Clogs</SelectItem>
-                    <SelectItem value='slippers'>Slippers</SelectItem>
+                    {categories.map((category: any) => (
+                      <SelectItem
+                        key={category.id}
+                        value={category.categoryName}
+                      >
+                        {category.categoryName}
+                      </SelectItem>
+                    ))}
                   </SelectGroup>
                 </SelectContent>
+              <input type="hidden" name="category" id='categoryInput' />
               </Select>
+
 
               {/* Create Category */}
               <div>
                 <Button
                   variant='outline'
                   className='mt-2'
-                  onClick={() => alert('Create new category')}
+                  type='button'
+                  onClick={() => setOpenCreateCategory(!false)}
                 >
                   Create Category
                 </Button>
               </div>
+
+            {
+              openCreateCategory && <CreateCategory />
+            }
             </Card>
           </div>
         </div>
