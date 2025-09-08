@@ -63,14 +63,14 @@ const Categories = () => {
               alt='Product Category'
             />
           </div>
-          <Link href='' >
+          <Link href='/' >
             <Button variant={'outline'} className='cursor-pointer rounded-full'>
               Shop Now
             </Button>
           </Link>
         </CardContent>
       </Card>
-     <Link href='' className='cursor-pointer'>
+     <Link href='/' className='cursor-pointer'>
       <Card className='bg-[#F3F3F3]'>
         <CardContent className='p-4 px-6'>
           <div>
