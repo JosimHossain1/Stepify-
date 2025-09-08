@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from '@/components/ui/card';
 import React from 'react';
 import Image from 'next/image';
@@ -5,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowBigRight } from 'lucide-react';
 
 const HeroContent = () => {
+
   return (
     <main className='h-fit  backdrop-blur-lg bg-gradient-to-b from-[#D1DCDD] to-[#EFF0DB]'>
       <div className='w-[83%] grid grid-cols-12 gap-6 mx-auto py-10 '>
@@ -32,6 +34,8 @@ const HeroContent = () => {
               </div>
             </CardContent>
           </Card>
+
+        
         </section>
 
         {/* Right Sidebar */}

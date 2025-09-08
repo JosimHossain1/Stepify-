@@ -1,5 +1,5 @@
 'use client';
-import Product from '@/app/components/Home/Product';
+import ProductCard from '@/app/components/Products/ProductCard';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
@@ -187,7 +187,7 @@ const ProductPage = () => {
 
       {/* All Products */}
       <div className='all-products col-span-9'>
-        <Product products={products} />
+        <ProductCard products={products} />
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import '../globals.css';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { AppSidebar } from '../components/Dashboard/Sidebar';
 import { cookies } from 'next/headers';
+import Layout from '../components/Layout';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -33,13 +34,15 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SidebarProvider defaultOpen={defaultOpen}>
+        <Layout>
+          <SidebarProvider defaultOpen={defaultOpen}>
           <AppSidebar />
           <main className='w-[90%] mx-auto'>
             <SidebarTrigger />
             {children}
           </main>
         </SidebarProvider>
+        </Layout>
       </body>
     </html>
   );
