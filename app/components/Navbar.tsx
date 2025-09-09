@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
@@ -6,9 +6,21 @@ import { Heart, ShoppingBag, Search } from 'lucide-react';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import CartItem from './Cart/CartItem';
+
 export default function Navbar() {
-  const {cart, wishlist} = useSelector(state => state.cart)
-  console.log(cart)
+  const { cart, wishlist } = useSelector((state) => state.cart);
+
   return (
     <header
       className='flex w-[80%] mx-auto mt-4  items-center justify-between mb-8 rounded-full shadow border border-gray-500 py-2 px-8 backdrop-blur-2xl
@@ -25,31 +37,51 @@ export default function Navbar() {
         </Button>
       </div>
 
-      <div className='flex items-center gap-4'>
-        <Button size='icon' variant='ghost'>
-          <div className='relative inline-flex'>
-            <span
-              className='rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none'
-            
-            >
-              <Link href={'/cart'}>
-            <ShoppingBag />
-          </Link>
-            </span>
-            <span className='absolute top-0.5 right-0.5 grid min-h-[24px] min-w-[24px] translate-x-2/4 -translate-y-2/4 place-items-center rounded-full bg-red-600 py-1 px-1 text-xs text-white'>
-              {cart.length}
-            </span>
-          </div>
+      <div className='relative flex items-center gap-4'>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant='outline'>
+              <ShoppingBag />
+            </Button>
+          </SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle>Shopping Cart</SheetTitle>
+              <SheetDescription>
+                Review your items and proceed to checkout.
+              </SheetDescription>
+            </SheetHeader>
+            <div className='mt-4 space-y-4 px-6 scroll-auto'>
+              <CartItem increaseOptions={true} />
+              <CartItem increaseOptions={true} />
+            </div>
+            <SheetFooter>
+              <Button type='submit'>Proceed to Checkout</Button>
+              <SheetClose asChild>
+                <Button variant='outline'>
+                   Continue Shopping
+                </Button>
+              </SheetClose>
+            </SheetFooter>
+          </SheetContent>
+        </Sheet>
 
-          
-        </Button>
-        <Button size='icon' variant='ghost'>
-          <Link href='/wishlist'><Heart /></Link>
-        </Button>
-        <Avatar>
-          <AvatarImage src='https://i.pravatar.cc/40' />
-        </Avatar>
+        <span className='absolute top-0.5 right-0.5 grid min-h-[24px] min-w-[24px] translate-x-2/4 -translate-y-2/4 place-items-center rounded-full bg-red-600 py-1 px-1 text-xs text-white'>
+          {cart.length}
+        </span>
       </div>
+
+      <Button size='icon' variant='ghost' className='relative'>
+        <Link href='/wishlist'>
+          <Heart />
+        </Link>
+         <span className='absolute top-0.5 right-0.5 grid min-h-[24px] min-w-[24px] translate-x-2/4 -translate-y-2/4 place-items-center rounded-full bg-red-600 py-1 px-1 text-xs text-white'>
+          {wishlist.length}
+        </span>
+      </Button>
+      <Avatar>
+        <AvatarImage src='https://i.pravatar.cc/40' />
+      </Avatar>
     </header>
   );
 }

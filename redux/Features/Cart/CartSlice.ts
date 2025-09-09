@@ -9,12 +9,11 @@ import { createSlice } from '@reduxjs/toolkit';
 // Step 5 : Export all the reducer, destructure from slice name.action
 // Step 6 : export default slice.reducer
 
-
 export type cartState = {
-  cart : object[],
-  wishlist : object[]
-}
-const initialState : cartState = {
+  cart: object[];
+  wishlist: object[];
+};
+const initialState: cartState = {
   cart: [],
   wishlist: [],
 };
@@ -26,12 +25,15 @@ export const cartSlice = createSlice({
     addToCart: (state, action) => {
       state.cart.push(action.payload);
     },
-    removeFromCart: (state, action) => {
-      state.cart = state.cart.filter(item => item.id !== action.payload.id)
+    addToWishList: (state, action) => {
+      state.wishlist.push(action.payload);
+    },
+    removeFromWishlist: (state, action) => {
+      state.wishlist = state.wishlist.filter((item) => item._id !== action.payload); 
     },
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, addToWishList, removeFromWishlist } = cartSlice.actions;
 
 export default cartSlice.reducer;

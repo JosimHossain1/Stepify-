@@ -1,10 +1,15 @@
+'use client'
+import { removeFromWishlist } from '@/redux/Features/Cart/CartSlice';
 import { Trash } from 'lucide-react'
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 
-const RemoveItem = () => {
+const RemoveItem = ({item}) => {
+
+}
   return (
     <div>
-      <Trash className='w-5 h-5 cursor-pointer hover:text-red-600 inline-block' />
+      <Trash onClick={() => handleRemoveItem(item)} className='w-5 h-5 cursor-pointer hover:text-red-600 inline-block' />
     </div>
   )
 }

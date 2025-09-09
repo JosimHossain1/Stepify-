@@ -1,4 +1,5 @@
 'use client';
+import AddToCartBtn from '@/app/components/Cart/AddToCartBtn';
 import Rating from '@/app/components/Home/Rating';
 import RelatedProduct from '@/app/components/Home/RelatedProduct';
 import Review from '@/app/components/Home/Review';
@@ -172,14 +173,10 @@ const ProductDetailsPage = () => {
               {/* Category */}
               <p className='text-gray-600 mb-4'>Category: {product.category}</p>
 
-              <div className='grid grid-cols-12  gap-4 mt-6'>
-                <Button
-                  className='w-full col-span-10 cursor-pointer'
-                  variant='default'
-                >
-                  <ShoppingBag className='h-5 w-5' />
-                  Add to Cart
-                </Button>
+              <div className='grid grid-cols-12  gap-4'>
+                <div className='col-span-10'>
+                  <AddToCartBtn outline={false} product={product} />
+                </div>
                 <Button variant='outline' className='col-span-2'>
                   <HeartPlus className='h-5 w-5' />
                 </Button>
