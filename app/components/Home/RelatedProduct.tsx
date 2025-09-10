@@ -1,10 +1,10 @@
 'use client';
-import { Button } from '@/components/ui/button';
-import { Card, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import axios from 'axios';
-import { HeartPlus } from 'lucide-react';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
+import AddToCartBtn from '../Cart/AddToCartBtn';
+import AddToWishlistBtn from '../wishlist/AddToWishlistBtn';
 
 const RelatedProduct = ({ category }) => {
   const [products, setProducts] = useState([]);
@@ -43,10 +43,12 @@ const RelatedProduct = ({ category }) => {
             <p className='text-md font-bold'>${product.price}</p>
 
             <div className='grid grid-cols-12 gap-2'>
-              <Button className='w-full mt-2 col-span-9'>Add to Cart</Button>
-              <Button variant='outline' className='mt-2 col-span-3'>
-                <HeartPlus className='h-5 w-5' />
-              </Button>
+              <span className='col-span-9'>
+                <AddToCartBtn product={product} outline={false}/>
+              </span>
+              <span className='col-span-3'>
+                <AddToWishlistBtn product={product} outline={true}/>
+              </span>
             </div>
           </Card>
         ))}

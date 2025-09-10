@@ -5,12 +5,14 @@ import IncreDecreBtn from '../Products/IncreDecreBtn';
 import { useDispatch, useSelector } from 'react-redux';
 import { Trash } from 'lucide-react';
 import { removeFromWishlist } from '@/redux/Features/Cart/CartSlice';
+import toast, { Toaster } from 'react-hot-toast';
 
 const CartItem = ({ increseOptions }: { increseOptions: boolean }) => {
   const items = useSelector((state) => state.cart.wishlist);
   const dispatch = useDispatch();
   const handleRemoveItem = (id : string) => {
     dispatch(removeFromWishlist(id));
+    toast.success('Removed from Wishlish!')
   };
   console.log(items);
   return (
@@ -56,6 +58,7 @@ const CartItem = ({ increseOptions }: { increseOptions: boolean }) => {
           </div>
         </div>
       ))}
+      <Toaster/>
     </>
   );
 };

@@ -5,38 +5,36 @@ import { Product } from '@/types/productType';
 import { Heart, HeartOff } from 'lucide-react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import toast, { Toaster } from 'react-hot-toast';
 
 const AddToWishlistBtn = ({
   product,
-  outline
+  outline,
 }: {
   product: Product;
   outline: boolean;
 }) => {
+  const wishlistItems = useSelector((state) => state.cart.wishlist);
+  console.log(wishlistItems);
+  const dispatch = useDispatch();
 
-    const wishlistItems = useSelector((state) => state.cart.wishlist);
-    console.log(wishlistItems)
-    const dispatch = useDispatch();
+  const handleAddToWishlist = (product: Product) => {
+    dispatch(addToWishList(product));
+    toast.success(`added`);
+  };
 
-    const handleAddToWishlist = (product: Product) => {
-      dispatch(addToWishList(product));
-      
-    };
-  
   return (
-    <Button
-      onClick={() => handleAddToWishlist(product)}
-      variant={outline ? 'outline' : 'default'}
-      className='w-full border-0 cursor-pointer'
-    >
-      {
-        product ? <HeartOff className='h-5 w-5' /> :<Heart className='h-5 w-5' /> 
-      }
-     
-    </Button>
+    <>
+      <Button
+        onClick={() => handleAddToWishlist(product)}
+        variant={outline ? 'outline' : 'default'}
+        className='w-full cursor-pointer'
+      >
+        <Heart className='h-5 w-5' />
+      </Button>
+      <Toaster />
+    </>
   );
 };
 
 export default AddToWishlistBtn;
-

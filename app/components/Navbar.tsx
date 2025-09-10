@@ -38,34 +38,7 @@ export default function Navbar() {
       </div>
 
       <div className='relative flex items-center gap-4'>
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant='outline'>
-              <ShoppingBag />
-            </Button>
-          </SheetTrigger>
-          <SheetContent>
-            <SheetHeader>
-              <SheetTitle>Shopping Cart</SheetTitle>
-              <SheetDescription>
-                Review your items and proceed to checkout.
-              </SheetDescription>
-            </SheetHeader>
-            <div className='mt-4 space-y-4 px-6 scroll-auto'>
-              <CartItem increaseOptions={true} />
-              <CartItem increaseOptions={true} />
-            </div>
-            <SheetFooter>
-              <Button type='submit'>Proceed to Checkout</Button>
-              <SheetClose asChild>
-                <Button variant='outline'>
-                   Continue Shopping
-                </Button>
-              </SheetClose>
-            </SheetFooter>
-          </SheetContent>
-        </Sheet>
-
+        <Link href='/cart'><ShoppingBag/></Link>
         <span className='absolute top-0.5 right-0.5 grid min-h-[24px] min-w-[24px] translate-x-2/4 -translate-y-2/4 place-items-center rounded-full bg-red-600 py-1 px-1 text-xs text-white'>
           {cart.length}
         </span>
@@ -75,7 +48,7 @@ export default function Navbar() {
         <Link href='/wishlist'>
           <Heart />
         </Link>
-         <span className='absolute top-0.5 right-0.5 grid min-h-[24px] min-w-[24px] translate-x-2/4 -translate-y-2/4 place-items-center rounded-full bg-red-600 py-1 px-1 text-xs text-white'>
+        <span className='absolute top-0.5 right-0.5 grid min-h-[24px] min-w-[24px] translate-x-2/4 -translate-y-2/4 place-items-center rounded-full bg-red-600 py-1 px-1 text-xs text-white'>
           {wishlist.length}
         </span>
       </Button>

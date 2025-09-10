@@ -12,10 +12,12 @@ import { createSlice } from '@reduxjs/toolkit';
 export type cartState = {
   cart: object[];
   wishlist: object[];
+  totalAmmount: number;
 };
 const initialState: cartState = {
   cart: [],
   wishlist: [],
+  totalAmmount: 0,
 };
 
 export const cartSlice = createSlice({
@@ -25,15 +27,36 @@ export const cartSlice = createSlice({
     addToCart: (state, action) => {
       state.cart.push(action.payload);
     },
+    removeFromCart: (state, action) => {
+      state.cart = state.cart.filter((item) => item._id !== action.payload);
+      state.totalAmmount =   state.cart.reduce(
+        (sum, item: any) => sum + item.price,
+        0,)
+    },
     addToWishList: (state, action) => {
       state.wishlist.push(action.payload);
     },
     removeFromWishlist: (state, action) => {
-      state.wishlist = state.wishlist.filter((item) => item._id !== action.payload); 
+      state.wishlist = state.wishlist.filter(
+        (item) => item._id !== action.payload,
+      );
+    },
+    totalAmmount: (state) => {
+      state.totalAmmount =  state.cart.reduce(
+        (sum, item: any) => sum + item.price,
+        0,
+      );
+      
     },
   },
 });
 
-export const { addToCart, addToWishList, removeFromWishlist } = cartSlice.actions;
+export const {
+  addToCart,
+  addToWishList,
+  removeFromWishlist,
+  removeFromCart,
+  totalAmmount,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

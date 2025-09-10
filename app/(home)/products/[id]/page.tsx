@@ -3,6 +3,7 @@ import AddToCartBtn from '@/app/components/Cart/AddToCartBtn';
 import Rating from '@/app/components/Home/Rating';
 import RelatedProduct from '@/app/components/Home/RelatedProduct';
 import Review from '@/app/components/Home/Review';
+import AddToWishlistBtn from '@/app/components/wishlist/AddToWishlistBtn';
 import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardTitle } from '@/components/ui/card';
 import axios from 'axios';
@@ -177,9 +178,9 @@ const ProductDetailsPage = () => {
                 <div className='col-span-10'>
                   <AddToCartBtn outline={false} product={product} />
                 </div>
-                <Button variant='outline' className='col-span-2'>
-                  <HeartPlus className='h-5 w-5' />
-                </Button>
+                <span className='col-span-2'>
+                  <AddToWishlistBtn product={product} outline={true}/>
+                </span>
               </div>
             </div>
           </Card>

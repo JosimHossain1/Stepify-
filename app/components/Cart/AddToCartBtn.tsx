@@ -1,9 +1,10 @@
 import { Button } from '@/components/ui/button';
-import { addToCart } from '@/redux/Features/Cart/CartSlice';
+import { addToCart, totalAmmount } from '@/redux/Features/Cart/CartSlice';
 import { Product } from '@/types/productType';
 import { ShoppingBag } from 'lucide-react';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
 
 const AddToCartBtn = ({
   product,
@@ -13,11 +14,12 @@ const AddToCartBtn = ({
   outline: boolean;
 }) => {
 
-    const cartItems = useSelector((state) => state.cart.cart);
     const dispatch = useDispatch();
   
     const handleAddToCart = (product: Product) => {
       dispatch(addToCart(product));
+      dispatch(totalAmmount(product))
+      toast.success('Add to cart successfully!')
     };
   
   return (
